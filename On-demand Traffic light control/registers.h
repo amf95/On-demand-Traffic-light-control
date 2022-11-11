@@ -24,4 +24,9 @@
 #define DDRD *((volatile uint8_t*)0x31)
 #define PIND *((volatile uint8_t*)0x30)
 
+
+#define TIFR *((volatile uint8_t*)0x58)
+// timer 0
+#define TCCR0 *((volatile uint8_t*)0x53)
+#define TCNT0 *((volatile uint8_t*)0x52)
 #endif

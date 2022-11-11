@@ -123,9 +123,31 @@ void DIO_write(uint8_t pinNumber, uint8_t portNumber, uint8_t value){
 }
 
 void DIO_toggle(uint8_t pinNumber, uint8_t portNumber){
-
+    uint8_t value;
+    DIO_read(pinNumber, portNumber, &value);
+    DIO_write(pinNumber, portNumber, !value);
 }
 
 void DIO_read(uint8_t pinNumber, uint8_t portNumber, uint8_t *value){
+    switch (portNumber)
+    {
+        case PORT_A:
+            *value = (PINA & (1<<pinNumber)) >> pinNumber;
+            break;
+            
+        case PORT_B:
+            *value = (PINB & (1<<pinNumber)) >> pinNumber;
+            break;
+        
+        case PORT_C:
+            *value = (PINC & (1<<pinNumber)) >> pinNumber;
+            break;
 
-}
+        case PORT_D:
+            *value = (PIND & (1<<pinNumber)) >> pinNumber;
+            break;
+
+        default:
+            break;
+    }
+}   
